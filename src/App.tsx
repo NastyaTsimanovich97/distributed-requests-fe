@@ -1,23 +1,33 @@
 import { useState } from 'react';
+
 import './App.css';
+import { CreateUrl } from './components/CreateUrl/CreateUrl';
+import { RequestRunner } from './components/RequestRunner/RequestRunner';
+import { Table } from './components/Table/Table';
+import { requestRunner } from './services/requestRunnerApi';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleRunRequests = async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await requestRunner();
+
+      await response.json();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <RequestRunner handleClick={handleRunRequests} />
+      <CreateUrl />
+      <Table isLoading={isLoading} />
     </>
   );
 }

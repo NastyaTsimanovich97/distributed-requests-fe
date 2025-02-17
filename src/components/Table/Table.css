@@ -1,0 +1,9 @@
+.table-container {
+  display: grid;
+}
+
+.table-column-container {
+  display: grid;
+  grid-template-columns: 250px 500px 200px 200px;
+  gap: 2em;
+}

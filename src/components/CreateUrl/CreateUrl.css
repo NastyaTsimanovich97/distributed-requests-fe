@@ -1,0 +1,9 @@
+.create-url-container {
+  margin: 2em;
+}
+
+.create-url-form-container {
+  display: grid;
+  grid-template-columns: auto 200px;
+  gap: 2em;
+}
